@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="EndianBinaryStreams.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="EndianBinaryStreams.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SuperBMDLib\SuperBMDLib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="EndianBinaryStreams">
+      <HintPath>EndianBinaryStreams.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
