@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SuperBMDLib\SuperBMDLib.csproj" />
+    <ProjectReference Include="..\SuperBMD\SuperBMDLib\SuperBMDLib.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BTIConv", "BTIConv\BTIConv.csproj", "{436EC30A-1115-430B-A251-8E6451DF0BD3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperBMDLib", "SuperBMDLib\SuperBMDLib.csproj", "{4FCB9D02-691F-4B58-A033-F0552FCC6AF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SuperBMDLib", "SuperBMD\SuperBMDLib\SuperBMDLib.csproj", "{AA082AB8-00AD-45BD-A3C8-823C11E460E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{436EC30A-1115-430B-A251-8E6451DF0BD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{436EC30A-1115-430B-A251-8E6451DF0BD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{436EC30A-1115-430B-A251-8E6451DF0BD3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4FCB9D02-691F-4B58-A033-F0552FCC6AF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4FCB9D02-691F-4B58-A033-F0552FCC6AF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4FCB9D02-691F-4B58-A033-F0552FCC6AF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4FCB9D02-691F-4B58-A033-F0552FCC6AF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA082AB8-00AD-45BD-A3C8-823C11E460E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA082AB8-00AD-45BD-A3C8-823C11E460E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA082AB8-00AD-45BD-A3C8-823C11E460E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA082AB8-00AD-45BD-A3C8-823C11E460E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
