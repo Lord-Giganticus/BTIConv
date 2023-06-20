@@ -1,4 +1,6 @@
-﻿namespace BTIConv;
+﻿using System.ComponentModel;
+
+namespace BTIConv;
 
 public static class Methods
 {
@@ -13,7 +15,7 @@ public static class Methods
         return image;
     }
 
-    public static BinaryTextureImage FromImage(FileInfo file)
+    public static BinaryTextureImage FromImage(FileInfo file, JObject obj)
     {
         if (file.Extension is ".bti")
             throw new Exception("Extension must not be bti.");
@@ -21,6 +23,7 @@ public static class Methods
         using Image<Bgra32> image = Image.Load<Bgra32>(buf);
         BinaryTextureImage res = new(file.Name);
         res.Load(image);
+        PopulateHeader(ref res, obj);
         return res;
     }
 
@@ -37,5 +40,29 @@ public static class Methods
         var tup = bti.EncodeData();
         writer.Write(tup.Item1);
         return stream.ToArray();
+    }
+
+    static void PopulateHeader(ref BinaryTextureImage bti, JObject obj)
+    {
+        var props = bti.GetType().GetProperties();
+        var fields = bti.GetType().GetFields();
+        var vprops = props.Where(x => obj.ContainsKey(x.Name)).ToArray();
+        var vfields = fields.Where(x => obj.ContainsKey(x.Name)).ToArray();
+        foreach (var prop in vprops)
+        {
+            if (obj[prop.Name] is JToken tok)
+            {
+                var value = tok.ToObject(prop.PropertyType);
+                prop.SetValue(bti, value);
+            }
+        }
+        foreach (var field in vfields)
+        {
+            if (obj[field.Name] is JToken tok)
+            {
+                var value = tok.ToObject(field.FieldType);
+                field.SetValue(bti, value);
+            }
+        }
     }
 }

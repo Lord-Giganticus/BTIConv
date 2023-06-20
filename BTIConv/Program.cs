@@ -4,6 +4,8 @@ global using GameFormatReader.Common;
 global using SixLabors.ImageSharp;
 global using SixLabors.ImageSharp.PixelFormats;
 global using static System.Console;
+global using Newtonsoft.Json;
+global using Newtonsoft.Json.Linq;
 
 string[] FileArgs = args.Where(x => new FileInfo(x).Exists).ToArray();
 
@@ -22,8 +24,10 @@ if (PngArgs.Length > 0)
     for (int i = 0; i < PngArgs.Length; i++)
     {
         FileInfo file = new(PngArgs[i]);
+        string json = File.ReadAllText($"{file.Directory?.FullName}\\{file.NameWithoutExt()}.json");
+        JObject obj = JObject.Parse(json);
         using FileStream BtiStream = new($"{file.Directory?.FullName}\\{file.NameWithoutExt()}.bti", FileMode.Create);
-        BinaryTextureImage bti = Methods.FromImage(file);
+        BinaryTextureImage bti = Methods.FromImage(file, obj);
         var buf = Methods.ToBytes(bti);
         BtiStream.Write(buf);
     }
@@ -35,8 +39,10 @@ if (BtiArgs.Length > 0)
     {
         FileInfo file = new(BtiArgs[i]);
         BinaryTextureImage image = Methods.LoadBti(file, Endian.Big);
+        string json = JsonConvert.SerializeObject(image, Formatting.Indented);
         using Image<Bgra32> res = Methods.GetImage(image);
         res.Save($"{file.Directory?.FullName}\\{file.NameWithoutExt()}.png");
+        File.WriteAllText($"{file.Directory?.FullName}\\{file.NameWithoutExt()}.json", json);
     }
 }
 
