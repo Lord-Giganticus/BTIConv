@@ -37,6 +37,11 @@ public static class Methods
         bti.WriteHeader(writer);
         var tup = bti.EncodeData();
         writer.Write(tup.Item1);
+        writer.Seek(12, SeekOrigin.Begin);
+        writer.Write(32);
+        writer.Seek(28, SeekOrigin.Begin);
+        writer.Write(32 + bti.PaletteCount);
+        SuperBMDLib.Util.StreamUtility.PadStreamWithByte(writer, 32, 0x40);
         return stream.ToArray();
     }
 
