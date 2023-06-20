@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace BTIConv;
+﻿namespace BTIConv;
 
 public static class Methods
 {
