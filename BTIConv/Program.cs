@@ -24,8 +24,9 @@ if (PngArgs.Length > 0)
     for (int i = 0; i < PngArgs.Length; i++)
     {
         FileInfo file = new(PngArgs[i]);
-        string json = File.ReadAllText($"{file.Directory?.FullName}\\{file.NameWithoutExt()}.json");
-        JObject obj = JObject.Parse(json);
+        JObject obj = new();
+        if (File.Exists($"{file.Directory?.FullName}\\{file.NameWithoutExt()}.json"))
+            obj = JObject.Parse(File.ReadAllText($"{file.Directory?.FullName}\\{file.NameWithoutExt()}.json"));
         using FileStream BtiStream = new($"{file.Directory?.FullName}\\{file.NameWithoutExt()}.bti", FileMode.Create);
         BinaryTextureImage bti = Methods.FromImage(file, obj);
         var buf = Methods.ToBytes(bti);
