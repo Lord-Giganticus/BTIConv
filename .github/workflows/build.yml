@@ -1,0 +1,38 @@
+name: Build BTIConv
+
+on:
+    push:
+        branches: [ master ]
+
+jobs:
+    build:
+        runs-on: windows-latest
+
+        steps:
+        - uses: actions/checkout@v4.1.1
+        - uses: actions/setup-dotnet@v4.0.0
+          with:
+            dotnet-version: '8.x.x'
+        - shell: cmd
+          run: mkdir linux-x64 osx-x64 win-x64
+        - shell: cmd
+          working-directory: BTIConv
+          run: |
+            dotnet restore
+            dotnet publish -r win-x64 -p:PublishSingleFile=true --self-contained
+            dotnet publish -r linux-x64 -p:PublishSingleFile=true --self-contained
+            dotnet publish -r osx-x64 -p:PublishSingleFile=true --self-contained
+        - shell: cmd
+          working-directory: BTIConv/bin/Release/net8.0/osx-x64/publish
+          run: copy BTIConv ${{ github.workspace }}\osx-x64
+        - shell: cmd
+          working-directory: BTIConv/bin/Release/net8.0/linux-x64/publish
+          run: copy BTIConv ${{ github.workspace }}\linux-x64
+        - shell: cmd
+          working-directory: BTIConv/bin/Release/net8.0/win-x64/publish
+          run: copy BTIConv.exe ${{ github.workspace }}\win-x64
+        - shell: cmd
+          run: 7z a BTIConv.zip osx-x64 linux-x64 win-x64
+        - uses: actions/upload-artifact@v4.3.1
+          with:
+            path: BTIConv.zip
